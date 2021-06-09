@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: CustomColors.blueColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      debugShowCheckedModeBanner: false,
       home: ChangeNotifierProvider<MenuInfo>(
         create: (context) => MenuInfo(
           MenuType.clock,
