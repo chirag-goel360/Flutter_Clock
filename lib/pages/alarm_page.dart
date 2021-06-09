@@ -14,7 +14,7 @@ class AlarmPage extends StatefulWidget {
 
 class _AlarmPageState extends State<AlarmPage> {
   DateTime _alarmTime;
-  String _alarmTimeString;
+  String alarmTimeString;
   AlarmDatabase _alarmHelper = AlarmDatabase();
   Future<List<AlarmInfo>> _alarms;
   List<AlarmInfo> _currentAlarms;
@@ -32,6 +32,97 @@ class _AlarmPageState extends State<AlarmPage> {
   void loadAlarms() {
     _alarms = _alarmHelper.getAlarms();
     if (mounted) setState(() {});
+  }
+
+  void modalSheet() {
+    showModalBottomSheet(
+      useRootNavigator: true,
+      context: context,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(24),
+        ),
+      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Container(
+              padding: EdgeInsets.all(32),
+              child: Column(
+                children: [
+                  TextButton(
+                    onPressed: () async {
+                      var selectedTime = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
+                      if (selectedTime != null) {
+                        final now = DateTime.now();
+                        var selectedDateTime = DateTime(
+                          now.year,
+                          now.month,
+                          now.day,
+                          selectedTime.hour,
+                          selectedTime.minute,
+                        );
+                        _alarmTime = selectedDateTime;
+                        setModalState(
+                          () {
+                            alarmTimeString = DateFormat('HH:mm').format(
+                              selectedDateTime,
+                            );
+                          },
+                        );
+                      }
+                    },
+                    child: Text(
+                      alarmTimeString,
+                      style: TextStyle(
+                        fontSize: 32,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Repeat',
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Sound',
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Title',
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                    ),
+                  ),
+                  FloatingActionButton.extended(
+                    onPressed: onSaveAlarm,
+                    icon: Icon(
+                      Icons.alarm,
+                    ),
+                    label: Text(
+                      'Save',
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -185,105 +276,10 @@ class _AlarmPageState extends State<AlarmPage> {
                               ),
                               child: TextButton(
                                 onPressed: () {
-                                  _alarmTimeString = DateFormat('HH:mm').format(
+                                  alarmTimeString = DateFormat('HH:mm').format(
                                     DateTime.now(),
                                   );
-                                  showModalBottomSheet(
-                                      useRootNavigator: true,
-                                      context: context,
-                                      clipBehavior: Clip.antiAlias,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(24),
-                                        ),
-                                      ),
-                                      builder: (context) {
-                                        return StatefulBuilder(
-                                          builder: (context, setModalState) {
-                                            return Container(
-                                              padding: EdgeInsets.all(32),
-                                              child: Column(
-                                                children: [
-                                                  TextButton(
-                                                    onPressed: () async {
-                                                      var selectedTime =
-                                                          await showTimePicker(
-                                                        context: context,
-                                                        initialTime:
-                                                            TimeOfDay.now(),
-                                                      );
-                                                      if (selectedTime !=
-                                                          null) {
-                                                        final now =
-                                                            DateTime.now();
-                                                        var selectedDateTime =
-                                                            DateTime(
-                                                          now.year,
-                                                          now.month,
-                                                          now.day,
-                                                          selectedTime.hour,
-                                                          selectedTime.minute,
-                                                        );
-                                                        _alarmTime =
-                                                            selectedDateTime;
-                                                        setModalState(
-                                                          () {
-                                                            _alarmTimeString =
-                                                                DateFormat(
-                                                                        'HH:mm')
-                                                                    .format(
-                                                              selectedDateTime,
-                                                            );
-                                                          },
-                                                        );
-                                                      }
-                                                    },
-                                                    child: Text(
-                                                      _alarmTimeString,
-                                                      style: TextStyle(
-                                                        fontSize: 32,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  ListTile(
-                                                    title: Text(
-                                                      'Repeat',
-                                                    ),
-                                                    trailing: Icon(
-                                                      Icons.arrow_forward_ios,
-                                                    ),
-                                                  ),
-                                                  ListTile(
-                                                    title: Text(
-                                                      'Sound',
-                                                    ),
-                                                    trailing: Icon(
-                                                      Icons.arrow_forward_ios,
-                                                    ),
-                                                  ),
-                                                  ListTile(
-                                                    title: Text(
-                                                      'Title',
-                                                    ),
-                                                    trailing: Icon(
-                                                      Icons.arrow_forward_ios,
-                                                    ),
-                                                  ),
-                                                  FloatingActionButton.extended(
-                                                    onPressed: onSaveAlarm,
-                                                    icon: Icon(
-                                                      Icons.alarm,
-                                                    ),
-                                                    label: Text(
-                                                      'Save',
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      });
+                                  modalSheet();
                                 },
                                 style: TextButton.styleFrom(
                                   padding: EdgeInsets.symmetric(
@@ -313,26 +309,12 @@ class _AlarmPageState extends State<AlarmPage> {
                             ),
                           )
                         else
-                          Center(
-                            child: Text(
-                              'Only 5 alarms allowed!',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          MaxAlarm(),
                       ],
                     ).toList(),
                   );
                 } else {
-                  return Center(
-                    child: Text(
-                      'Loading..',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  );
+                  return Loading();
                 }
               },
             ),
@@ -399,5 +381,41 @@ class _AlarmPageState extends State<AlarmPage> {
   void deleteAlarm(int id) {
     _alarmHelper.delete(id);
     loadAlarms();
+  }
+}
+
+class MaxAlarm extends StatelessWidget {
+  const MaxAlarm({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Only 5 alarms allowed!',
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class Loading extends StatelessWidget {
+  const Loading({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Loading..',
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 }
