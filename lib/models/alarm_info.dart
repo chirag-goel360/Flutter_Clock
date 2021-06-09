@@ -1,14 +1,35 @@
-import 'package:flutter/material.dart';
-
 class AlarmInfo {
+  int id;
+  String title;
   DateTime alarmDateTime;
-  String description;
-  bool isActive;
-  List<Color> gradientColors;
+  bool isPending;
+  int gradientColorIndex;
 
-  AlarmInfo(
-    this.alarmDateTime, {
-    this.description,
-    this.gradientColors,
+  AlarmInfo({
+    this.id,
+    this.title,
+    this.alarmDateTime,
+    this.isPending,
+    this.gradientColorIndex,
   });
+
+  factory AlarmInfo.fromMap(Map<String, dynamic> json) {
+    return AlarmInfo(
+      id: json["id"],
+      title: json["title"],
+      alarmDateTime: DateTime.parse(json["alarmDateTime"]),
+      isPending: json["isPending"],
+      gradientColorIndex: json["gradientColorIndex"],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "title": title,
+      "alarmDateTime": alarmDateTime.toIso8601String(),
+      "isPending": isPending,
+      "gradientColorIndex": gradientColorIndex,
+    };
+  }
 }
