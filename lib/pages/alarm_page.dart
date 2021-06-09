@@ -18,6 +18,7 @@ class _AlarmPageState extends State<AlarmPage> {
   AlarmDatabase _alarmHelper = AlarmDatabase();
   Future<List<AlarmInfo>> _alarms;
   List<AlarmInfo> _currentAlarms;
+  bool value = true;
 
   @override
   void initState() {
@@ -83,10 +84,10 @@ class _AlarmPageState extends State<AlarmPage> {
                   ),
                   ListTile(
                     title: Text(
-                      'Repeat',
+                      'Repeat (Mon-Sun)',
                     ),
                     trailing: Icon(
-                      Icons.arrow_forward_ios,
+                      Icons.repeat,
                     ),
                   ),
                   ListTile(
@@ -94,7 +95,7 @@ class _AlarmPageState extends State<AlarmPage> {
                       'Sound',
                     ),
                     trailing: Icon(
-                      Icons.arrow_forward_ios,
+                      Icons.music_note,
                     ),
                   ),
                   ListTile(
@@ -102,7 +103,7 @@ class _AlarmPageState extends State<AlarmPage> {
                       'Title',
                     ),
                     trailing: Icon(
-                      Icons.arrow_forward_ios,
+                      Icons.text_snippet_rounded,
                     ),
                   ),
                   FloatingActionButton.extended(
@@ -211,14 +212,26 @@ class _AlarmPageState extends State<AlarmPage> {
                                     ],
                                   ),
                                   Switch(
-                                    value: true,
+                                    value: value,
                                     activeColor: CustomColors.primaryTextColor,
-                                    onChanged: (bool value) {},
+                                    onChanged: (bool val) {
+                                      if (value == false) {
+                                        setState(() {
+                                          value = true;
+                                        });
+                                        print('Switch Button is ON');
+                                      } else {
+                                        setState(() {
+                                          value = false;
+                                        });
+                                        print('Switch Button is OFF');
+                                      }
+                                    },
                                   ),
                                 ],
                               ),
                               Text(
-                                'Mon-Fri',
+                                'Mon-Sun',
                                 style: TextStyle(
                                   color: CustomColors.primaryTextColor,
                                   fontFamily: 'avenir',

@@ -35,7 +35,7 @@ class _ClockPageState extends State<ClockPage> {
               style: TextStyle(
                 color: CustomColors.primaryTextColor,
                 fontWeight: FontWeight.w700,
-                fontSize: 24,
+                fontSize: 30,
                 fontFamily: 'avenir',
               ),
             ),
@@ -59,7 +59,7 @@ class _ClockPageState extends State<ClockPage> {
             ),
           ),
           Flexible(
-            flex: 4,
+            flex: 3,
             fit: FlexFit.tight,
             child: Align(
               alignment: Alignment.center,
@@ -69,7 +69,7 @@ class _ClockPageState extends State<ClockPage> {
             ),
           ),
           Flexible(
-            flex: 2,
+            flex: 3,
             fit: FlexFit.tight,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,15 +88,121 @@ class _ClockPageState extends State<ClockPage> {
                 ),
                 Row(
                   children: [
-                    Icon(
-                      Icons.language,
-                      color: CustomColors.primaryTextColor,
+                    Container(
+                      width: 40,
+                      child: Image.asset(
+                        'assets/us.png',
+                      ),
                     ),
                     SizedBox(
                       width: 16,
                     ),
                     Text(
                       "UTC " + offSetSign + " " + timezone,
+                      style: TextStyle(
+                        fontFamily: 'avenir',
+                        color: CustomColors.primaryTextColor,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: 10,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      child: Image.asset(
+                        'assets/uk.png',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      "UTC " + "+" + " " + "4:30:00",
+                      style: TextStyle(
+                        fontFamily: 'avenir',
+                        color: CustomColors.primaryTextColor,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: 10,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      child: Image.asset(
+                        'assets/ja.png',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      "UTC " + "-" + " " + "3:30:00",
+                      style: TextStyle(
+                        fontFamily: 'avenir',
+                        color: CustomColors.primaryTextColor,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: 10,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      child: Image.asset(
+                        'assets/ge.png',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      "UTC " + "+" + " " + "3:30:00",
+                      style: TextStyle(
+                        fontFamily: 'avenir',
+                        color: CustomColors.primaryTextColor,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: 10,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      child: Image.asset(
+                        'assets/au.png',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      "UTC " + "-" + " " + "4:30:00",
                       style: TextStyle(
                         fontFamily: 'avenir',
                         color: CustomColors.primaryTextColor,
