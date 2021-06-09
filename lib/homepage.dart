@@ -21,11 +21,9 @@ class _HomePageState extends State<HomePage> {
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: menuItems.map(
-              (currentMenuInfo) {
-                return buildFlatButton(currentMenuInfo);
-              },
-            ).toList(),
+            children: menuItems.map((currentMenuInfo) {
+              return buildFlatButton(currentMenuInfo);
+            }).toList(),
           ),
           VerticalDivider(
             color: CustomColors.dividerColor,

@@ -67,13 +67,11 @@ class _AlarmPageState extends State<AlarmPage> {
                           selectedTime.minute,
                         );
                         _alarmTime = selectedDateTime;
-                        setModalState(
-                          () {
-                            alarmTimeString = DateFormat('HH:mm').format(
-                              selectedDateTime,
-                            );
-                          },
-                        );
+                        setModalState(() {
+                          alarmTimeString = DateFormat('HH:mm').format(
+                            selectedDateTime,
+                          );
+                        });
                       }
                     },
                     child: Text(
@@ -324,8 +322,7 @@ class _AlarmPageState extends State<AlarmPage> {
     );
   }
 
-  void scheduleAlarm(
-      DateTime scheduledNotificationDateTime, AlarmInfo alarmInfo) async {
+  void scheduleAlarm(DateTime notificationDateTime, AlarmInfo alarmInfo) async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'alarm_notif',
       'alarm_notif',
@@ -350,9 +347,9 @@ class _AlarmPageState extends State<AlarmPage> {
     );
     await flutterLocalNotificationsPlugin.schedule(
       0,
-      'Office',
+      'Alarm',
       alarmInfo.title,
-      scheduledNotificationDateTime,
+      notificationDateTime,
       platformChannelSpecifics,
     );
   }

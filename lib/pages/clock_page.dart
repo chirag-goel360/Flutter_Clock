@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_clock/constants/theme_data.dart';
 import 'package:flutter_clock/pages/clock_view.dart';
@@ -12,7 +13,6 @@ class _ClockPageState extends State<ClockPage> {
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
-    var formattedTime = DateFormat('HH:mm').format(now);
     var formattedDate = DateFormat('EEE, d MMM').format(now);
     var timezone = now.timeZoneOffset.toString().split('.').first;
     var offSetSign = '';
@@ -45,14 +45,7 @@ class _ClockPageState extends State<ClockPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  formattedTime,
-                  style: TextStyle(
-                    color: CustomColors.primaryTextColor,
-                    fontSize: 64,
-                    fontFamily: 'avenir',
-                  ),
-                ),
+                DigitalClockWidget(),
                 Text(
                   formattedDate,
                   style: TextStyle(
@@ -116,6 +109,69 @@ class _ClockPageState extends State<ClockPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class DigitalClockWidget extends StatefulWidget {
+  const DigitalClockWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return DigitalClockWidgetState();
+  }
+}
+
+class DigitalClockWidgetState extends State<DigitalClockWidget> {
+  var formattedTime = DateFormat('HH:mm').format(
+    DateTime.now(),
+  );
+  Timer timer;
+
+  @override
+  void initState() {
+    this.timer = Timer.periodic(
+      Duration(
+        seconds: 1,
+      ),
+      (timer) {
+        var perviousMinute = DateTime.now()
+            .add(
+              Duration(
+                seconds: -1,
+              ),
+            )
+            .minute;
+        var currentMinute = DateTime.now().minute;
+        if (perviousMinute != currentMinute)
+          setState(() {
+            formattedTime = DateFormat('HH:mm').format(
+              DateTime.now(),
+            );
+          });
+      },
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    this.timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('Digital Clock Updated');
+    return Text(
+      formattedTime,
+      style: TextStyle(
+        fontFamily: 'avenir',
+        color: CustomColors.primaryTextColor,
+        fontSize: 64,
       ),
     );
   }

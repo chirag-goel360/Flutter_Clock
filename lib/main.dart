@@ -18,19 +18,25 @@ void main() async {
     requestAlertPermission: true,
     requestBadgePermission: true,
     requestSoundPermission: true,
-    onDidReceiveLocalNotification:
-        (int id, String title, String body, String payload) async {},
+    onDidReceiveLocalNotification: (
+      int id,
+      String title,
+      String body,
+      String payload,
+    ) async {},
   );
   var initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid,
     iOS: initializationSettingsiOS,
   );
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-      onSelectNotification: (String payload) async {
-    if (payload != null) {
-      debugPrint('Notification payload : ' + payload);
-    }
-  });
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onSelectNotification: (String payload) async {
+      if (payload != null) {
+        debugPrint('Notification payload : ' + payload);
+      }
+    },
+  );
   runApp(
     MyApp(),
   );
