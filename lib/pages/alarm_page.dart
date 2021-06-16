@@ -254,7 +254,7 @@ class _AlarmPageState extends State<AlarmPage> {
                                     icon: Icon(
                                       Icons.delete,
                                     ),
-                                    color: Colors.white,
+                                    color: CustomColors.primaryTextColor,
                                     onPressed: () {
                                       deleteAlarm(alarm.id);
                                     },
@@ -405,7 +405,7 @@ class MaxAlarm extends StatelessWidget {
       child: Text(
         'Only 5 alarms allowed!',
         style: TextStyle(
-          color: Colors.white,
+          color: CustomColors.primaryTextColor,
         ),
       ),
     );
@@ -423,7 +423,7 @@ class Loading extends StatelessWidget {
       child: Text(
         'Loading..',
         style: TextStyle(
-          color: Colors.white,
+          color: CustomColors.primaryTextColor,
         ),
       ),
     );
