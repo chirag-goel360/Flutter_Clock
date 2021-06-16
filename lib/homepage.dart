@@ -5,6 +5,7 @@ import 'package:flutter_clock/helper/enums.dart';
 import 'package:flutter_clock/models/menu_info.dart';
 import 'package:flutter_clock/pages/alarm_page.dart';
 import 'package:flutter_clock/pages/clock_page.dart';
+import 'package:flutter_clock/pages/stopwatch_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,6 +37,8 @@ class _HomePageState extends State<HomePage> {
                   return AlarmPage();
                 } else if (value.menuType == MenuType.clock) {
                   return ClockPage();
+                } else if (value.menuType == MenuType.stopwatch) {
+                  return StopWatchPage();
                 }
                 return Container(
                   child: RichText(
@@ -72,7 +75,6 @@ class _HomePageState extends State<HomePage> {
           style: TextButton.styleFrom(
             padding: EdgeInsets.symmetric(
               vertical: 16,
-              horizontal: 0,
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(

@@ -221,14 +221,8 @@ class _ClockPageState extends State<ClockPage> {
 }
 
 class DigitalClockWidget extends StatefulWidget {
-  const DigitalClockWidget({
-    Key key,
-  }) : super(key: key);
-
   @override
-  State<StatefulWidget> createState() {
-    return DigitalClockWidgetState();
-  }
+  State<StatefulWidget> createState() => DigitalClockWidgetState();
 }
 
 class DigitalClockWidgetState extends State<DigitalClockWidget> {

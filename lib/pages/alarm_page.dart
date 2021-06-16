@@ -383,7 +383,10 @@ class _AlarmPageState extends State<AlarmPage> {
       title: 'alarm',
     );
     _alarmHelper.insertAlarm(alarmInfo);
-    scheduleAlarm(scheduleAlarmDateTime, alarmInfo);
+    scheduleAlarm(
+      scheduleAlarmDateTime,
+      alarmInfo,
+    );
     Navigator.pop(context);
     loadAlarms();
   }
@@ -395,10 +398,6 @@ class _AlarmPageState extends State<AlarmPage> {
 }
 
 class MaxAlarm extends StatelessWidget {
-  const MaxAlarm({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -413,10 +412,6 @@ class MaxAlarm extends StatelessWidget {
 }
 
 class Loading extends StatelessWidget {
-  const Loading({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Center(

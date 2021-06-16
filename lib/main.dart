@@ -33,7 +33,7 @@ void main() async {
     initializationSettings,
     onSelectNotification: (String payload) async {
       if (payload != null) {
-        debugPrint('Notification payload : ' + payload);
+        debugPrint('Notification payload: ' + payload);
       }
     },
   );

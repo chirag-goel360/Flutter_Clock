@@ -60,7 +60,9 @@ class AlarmDatabase {
   Future<List<AlarmInfo>> getAlarms() async {
     List<AlarmInfo> _alarms = [];
     var db = await this.database;
-    var result = await db.query(alarmTable);
+    var result = await db.query(
+      alarmTable,
+    );
     result.forEach((element) {
       var alarmInfo = AlarmInfo.fromMap(element);
       _alarms.add(alarmInfo);

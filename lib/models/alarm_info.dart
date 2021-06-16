@@ -17,7 +17,9 @@ class AlarmInfo {
     return AlarmInfo(
       id: json["id"],
       title: json["title"],
-      alarmDateTime: DateTime.parse(json["alarmDateTime"]),
+      alarmDateTime: DateTime.parse(
+        json["alarmDateTime"],
+      ),
       isPending: json["isPending"],
       gradientColorIndex: json["gradientColorIndex"],
     );
