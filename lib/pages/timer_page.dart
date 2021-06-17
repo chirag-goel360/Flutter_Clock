@@ -23,6 +23,12 @@ class _TimerPageState extends State<TimerPage> {
   }
 
   @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (timer == null) {
       timer = Timer.periodic(
