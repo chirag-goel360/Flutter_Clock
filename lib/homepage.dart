@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                 Radius.circular(32),
               ),
             ),
-            primary: currentMenuInfo.menuType == value.menuType
+            backgroundColor: currentMenuInfo.menuType == value.menuType
                 ? CustomColors.menuBackgroundColor
                 : CustomColors.transparent,
           ),
