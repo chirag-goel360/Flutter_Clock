@@ -28,8 +28,8 @@ class _StopWatchPageState extends State<StopWatchPage> {
   @override
   void initState() {
     if (stopwatch.isRunning) {
-      timer = new Timer.periodic(
-        new Duration(
+      timer = Timer.periodic(
+        Duration(
           milliseconds: 20,
         ),
         updateTime,
@@ -148,8 +148,8 @@ class _StopWatchPageState extends State<StopWatchPage> {
       );
       rightButtonColor = Colors.white70;
       stopwatch.start();
-      timer = new Timer.periodic(
-        new Duration(
+      timer = Timer.periodic(
+        Duration(
           milliseconds: 20,
         ),
         updateTime,

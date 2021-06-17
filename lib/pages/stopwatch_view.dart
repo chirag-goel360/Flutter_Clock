@@ -74,7 +74,7 @@ class StopWatchPainter extends CustomPainter {
     double radiusMinutes = mainCenter - (width * 1.5);
     double radiusHours = mainCenter;
     double radian = math.pi / 180;
-    Paint line = new Paint()
+    Paint line = Paint()
       ..color = Colors.blueAccent
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
@@ -93,7 +93,7 @@ class StopWatchPainter extends CustomPainter {
     line.color = Colors.yellow;
     double arcAngleMinutes = (radian) * (minutes * 6);
     canvas.drawArc(
-      new Rect.fromCircle(
+      Rect.fromCircle(
         center: center,
         radius: radiusMinutes,
       ),
@@ -105,7 +105,7 @@ class StopWatchPainter extends CustomPainter {
     line.color = Colors.green;
     double arcAngleHours = (radian) * (hours * 30);
     canvas.drawArc(
-      new Rect.fromCircle(
+      Rect.fromCircle(
         center: center,
         radius: radiusHours,
       ),

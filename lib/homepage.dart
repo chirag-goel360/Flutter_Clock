@@ -6,6 +6,7 @@ import 'package:flutter_clock/models/menu_info.dart';
 import 'package:flutter_clock/pages/alarm_page.dart';
 import 'package:flutter_clock/pages/clock_page.dart';
 import 'package:flutter_clock/pages/stopwatch_page.dart';
+import 'package:flutter_clock/pages/timer_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,6 +40,8 @@ class _HomePageState extends State<HomePage> {
                   return ClockPage();
                 } else if (value.menuType == MenuType.stopwatch) {
                   return StopWatchPage();
+                } else if (value.menuType == MenuType.timer) {
+                  return TimerPage();
                 }
                 return Container(
                   child: RichText(
